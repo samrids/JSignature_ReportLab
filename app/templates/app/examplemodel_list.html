@@ -1,0 +1,29 @@
+
+{% extends "base.html" %}{% load jsignature_filters %}
+
+{% block content %}
+  <h1>List</h1>
+
+  <ul>
+    {% for obj in object_list %}
+      <li>
+        <dl>
+          <dt>Topic</dt>
+          <dd>{{ obj.topic }}</dd>
+          <dt>Employee</dt>
+          <dd>{{ obj.employee_name }}</dd>          
+          <dt>Signature</dt>
+          <dd>
+            <img src="{{ obj.signature|signature_base64 }}" alt="{{ obj }}" />
+            <a href="{% url 'update' obj.pk %}" class="btn btn-primary">
+              Update
+            </a>
+            <a href="{% url 'generate_pdf' obj.pk %}" class="btn btn-info">
+              pdf_sample
+            </a>            
+          </dd>
+        </dl>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
